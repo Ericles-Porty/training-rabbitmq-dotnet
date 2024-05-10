@@ -1,8 +1,6 @@
-using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.RateLimiting;
-using Protech.Animes.Domain.Policies;
-
-namespace Protech.Animes.API.Extensions.RateLimit;
+using Eris.Rabbit.Store.Domain.Policies;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class RateLimitExtension
 {
@@ -12,18 +10,6 @@ public static class RateLimitExtension
             options =>
             {
                 options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
-
-                options.AddPolicy(
-                    policyName: RateLimitPolicies.LoginAttempts,
-                    partitioner: httpContext => RateLimitPartition.GetFixedWindowLimiter(
-                        partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
-                        factory: (key) => new FixedWindowRateLimiterOptions
-                        {
-                            PermitLimit = 10,
-                            Window = TimeSpan.FromMinutes(10)
-                        }
-                    )
-                );
 
                 options.AddFixedWindowLimiter(
                     policyName: RateLimitPolicies.Fixed,

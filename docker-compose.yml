@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    ports:
+      - "8080:8080"  # Mapeamento da porta do contêiner para a porta do host
+    depends_on:
+      - rabbitmq
+      - database
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"  # Porta de comunicação padrão
+      - "15672:15672"  # Porta da interface de gerenciamento
+    volumes:
+      - "rabbitmq_data:/var/lib/rabbitmq"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=123456
+
+  database:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      ACCEPT_EULA : "Y" # Aceitação do contrato de licença
+      MSSQL_SA_PASSWORD  : "#S3nh4F0rt3KKK" # Senha do usuário SA
+    ports:
+      - "1433:1433"  # Porta de comunicação padrão do SQL Server
+
+volumes:
+  rabbitmq_data:

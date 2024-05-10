@@ -1,4 +1,4 @@
-namespace Domain.Entities;
+namespace Eris.Rabbit.Store.Domain.Entities;
 
 public class Purchase
 {
@@ -7,6 +7,8 @@ public class Purchase
     public decimal Total { get; }
     public DateTime CreatedAt { get; }
     public int ProductId { get; }
+    public Product Product { get; } = null!;
+    
 
     public Purchase(int productId, int quantity, decimal total)
     {

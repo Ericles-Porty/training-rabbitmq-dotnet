@@ -1,4 +1,4 @@
-namespace Protech.Animes.Domain.Exceptions;
+namespace Eris.Rabbit.Store.Domain.Exceptions;
 
 public class BadRequestException : Exception
 {

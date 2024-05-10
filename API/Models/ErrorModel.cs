@@ -1,5 +1,5 @@
 
-namespace Protech.Animes.API.Models;
+namespace Eris.Rabbit.Store.API.Models;
 
 public class ErrorModel
 {

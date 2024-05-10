@@ -1,14 +1,14 @@
+using Eris.Rabbit.Store.Domain.Interfaces.Repositories;
+using Eris.Rabbit.Store.Infra.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
-using Protech.Animes.Domain.Interfaces.Repositories;
-using Protech.Animes.Infrastructure.Data.Contexts;
 
-namespace Protech.Animes.Infrastructure.Data.Repositories;
+namespace Eris.Rabbit.Store.Infra.Data.Repositories;
 
 public abstract class BaseRepository<T, K> : IBaseRepository<T, K> where T : class where K : struct
 {
-    private readonly ProtechAnimesDbContext _dbContext;
+    private readonly ErisStoreDbContext _dbContext;
 
-    public BaseRepository(ProtechAnimesDbContext context)
+    public BaseRepository(ErisStoreDbContext context)
     {
         _dbContext = context;
     }
@@ -50,12 +50,5 @@ public abstract class BaseRepository<T, K> : IBaseRepository<T, K> where T : cla
         _dbContext.Set<T>().Remove(entity);
         await _dbContext.SaveChangesAsync();
         return true;
-    }
-
-    protected IQueryable<T> Paginate(IQueryable<T> query, int page, int pageSize)
-    {
-        return query
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize);
     }
 }
