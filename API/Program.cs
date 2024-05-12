@@ -1,3 +1,4 @@
+using Eris.Rabbit.Store.Application.CQRS.Commands.ConsumerCommands;
 using Eris.Rabbit.Store.Application.CQRS.Queries.ProducerQueries;
 using Eris.Rabbit.Store.Infra.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddRepositoryDependencies();
 
 builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<GetProductsQuery>());
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<ConsumePurchasesCommand>());
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDefinition();

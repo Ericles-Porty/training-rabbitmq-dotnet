@@ -1,3 +1,4 @@
+using Eris.Rabbit.Store.Application.CQRS.Commands.ProducerCommands;
 using Eris.Rabbit.Store.Application.CQRS.Queries.ProducerQueries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,17 @@ public class ProducerController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Products()
+    public async Task<IActionResult> ProducePurchases()
     {
-        var products = await _mediator.Send(new GetProductsQuery());
+        var random = new Random();
+
+        var command = new ProducePurchaseCommand
+        {
+            ProductId = 2,
+            Quantity = random.Next(1, 10),
+            Total = random.Next(100, 1000)
+        };
+        var products = await _mediator.Send(command);
         return Ok(products);
     }
 }

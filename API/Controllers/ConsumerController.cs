@@ -17,9 +17,10 @@ public class ConsumerController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Consume([FromBody] ConsumePurchasesCommand request)
+    [HttpGet]
+    public async Task<IActionResult> ConsumePurchases()
     {
-        return Ok();
+        var processedPurchases = await _mediator.Send(new ConsumePurchasesCommand());
+        return Ok(processedPurchases);
     }
 }

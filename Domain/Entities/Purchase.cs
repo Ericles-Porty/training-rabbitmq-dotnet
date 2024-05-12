@@ -2,19 +2,11 @@ namespace Eris.Rabbit.Store.Domain.Entities;
 
 public class Purchase
 {
-    public int Id { get; }
-    public int Quantity { get; }
-    public decimal Total { get; }
-    public DateTime CreatedAt { get; }
-    public int ProductId { get; }
-    public Product Product { get; } = null!;
-    
+    public int Id { get; set; }
+    public int Quantity { get; set; }
+    public decimal Total { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public int ProductId { get; set; }
+    public Product Product { get; set; } = null!;
 
-    public Purchase(int productId, int quantity, decimal total)
-    {
-        ProductId = productId;
-        Quantity = quantity;
-        Total = total;
-        CreatedAt = DateTime.UtcNow;
-    }
 }

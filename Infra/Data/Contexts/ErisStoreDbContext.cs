@@ -6,7 +6,6 @@ namespace Eris.Rabbit.Store.Infra.Data.Contexts;
 
 public class ErisStoreDbContext : DbContext
 {
-    public ErisStoreDbContext() { }
     public ErisStoreDbContext(DbContextOptions<ErisStoreDbContext> options) : base(options) { }
 
     public DbSet<Product> Products { get; set; }
